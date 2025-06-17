@@ -29,10 +29,10 @@ jobs:
           sudo ln -s -f /usr/bin/gcc-14 /usr/bin/gcc
           sudo ln -s -f /usr/bin/g++-14 /usr/bin/g++
           
-      - name: Build
+      - name: Build Pro
         run: |
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SDLGPU=On -DBUILD_STATIC=ON -DBUILD_WITH_ALL=ON ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SDLGPU=On -DBUILD_STATIC=ON -DBUILD_PRO=ON -DBUILD_WITH_ALL=ON ..
           cmake --build . --parallel
 
       - name: Deploy
@@ -42,12 +42,6 @@ jobs:
           path: |
             build/bin/tic80
             build/bin/*.so
-
-      - name: Build Pro
-        run: |
-          cd build
-          cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SDLGPU=On -DBUILD_PRO=On -DBUILD_WITH_ALL=ON ..
-          cmake --build . --config MinSizeRel --parallel
   # === Nintendo 3DS build ===
   nintendo-3ds:
     runs-on: ubuntu-latest
